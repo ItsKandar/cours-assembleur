@@ -1,7 +1,7 @@
 ; Expliquer le fonctionnement des lignes de code suivantes en une phrase
 
-MOV AX, CX ; AX prend la valeur de CX
-JMP marmotte ; Saute à l'adresse marmotte
-.CODE ; Début du code
-ADD AX, BX, 42 ; AX prend la valeur de AX + BX + 42
-marmotte: SUB AX, 00000001b ; AX prend la valeur de AX - 1
+MOV AX, CX ; Copier la vaeur de CX dans AX
+JMP marmotte ; Saute jusqu'au label "marmotte" sans condition
+.TEXT ; Defini une section de texte qui contient le code assembleur
+ADD AX, BX, 42 ; Addition de AX, BX et 42. Le résultat est stocké dans la destination : AX
+marmotte: SUB AX, 00000001b ; Definition du label "marmotte" et soustraction de 0b1 à la valeur du registre AX
