@@ -51,7 +51,7 @@ global main
 extern printf
 
 section .data
-    numbers dw 10, 0, 5, 2, 0, 1, -1 ; Liste d'entrée, terminée par -1. Ajustez selon les besoins.
+    numbers dw 10, 5, 5, 2, 1, 1, -1 ; Liste d'entrée, terminée par -1.
     format db "%d ", 0 ; Format pour printf
 
 section .text
@@ -109,15 +109,15 @@ capitalist_sort:
         lodsw ; Charger le mot suivant dans AX
         cmp ax, -1 ; Vérifier la fin de la liste
         je sort_done
+        cmp ax, 0 ; Vérifier si l'élément est déjà à 0
+        jz no_redistribution
         dec ax ; Décrémenter la valeur de l'élément "pauvre"
         sub esi, 2 ; Revenir à l'élément actuel après lodsw
         mov [esi], ax ; Sauvegarder la nouvelle valeur décrémentée
-        ; Vérifier si l'élément était déjà à 0 pour éviter de redistribuer
-        jz no_redistribution
         ; Répartir 1 parmi les trois premiers éléments "riches"
         add word [numbers], 1
-        add word [numbers + 2*2], 1
-        add word [numbers + 4*2], 1
+        add word [numbers + 2], 1
+        add word [numbers + 4], 1
         jmp sort_loop
     no_redistribution:
         jmp sort_loop
